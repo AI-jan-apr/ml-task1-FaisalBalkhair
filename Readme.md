@@ -1,112 +1,69 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/3TS0mELD)
-# Machine Learning Task 1
-## Breast Cancer — Binary Classification
+
+# Model Interpretation & Discussion
+
+## 1. Overall Performance
+
+All three models achieved high performance on the Breast Cancer dataset.  
+This suggests that the dataset is well-structured and largely linearly separable.
+
+Among the three models, **Logistic Regression** achieved the best overall performance based on Accuracy and F1-score.  
+SVM performed very similarly, while KNN showed slightly lower performance compared to the other two models.
 
 ---
 
-## Objective
+## 2. Why Did Logistic Regression Perform Well?
 
-In this task, you will build and compare multiple **binary classification** models to predict whether a tumor is:
+The Breast Cancer dataset contains numerical features with strong linear relationships to the target variable.  
+Since Logistic Regression is a linear classifier, it performs well when the data is close to linearly separable.
 
-- **0 — Malignant (Cancerous)**
-- **1 — Benign (Non-cancerous)**
+Additionally:
 
-You must use the following models covered in class:
-
-- Logistic Regression
-- Support Vector Machine (SVM)
-- K-Nearest Neighbors (KNN)
-
-The focus of this task is **model training, evaluation, and comparison**.
-
-⚠️ Feature scaling is NOT allowed in this task.
-
----
-
-## Dataset
-
-We will use the **Breast Cancer Wisconsin Dataset**, available directly in `scikit-learn`.
-
-### Dataset Overview
-
-- 569 samples
-- 30 numerical features
-- Binary target variable
 - No missing values
+- Balanced class distribution
+- Clean numerical features
 
-Each feature represents a measurement extracted from a digitized image of a breast mass (e.g., radius, texture, area, smoothness, concavity, symmetry, etc.).
-
----
-
-## Dataset Loading
-
-Use the following code to load the dataset:
-
-```python
-from sklearn.datasets import load_breast_cancer
-
-data = load_breast_cancer()
-X = data.data
-y = data.target
-```
+These factors contribute to strong performance for linear models.
 
 ---
 
-## Required Tasks
+## 3. Medical Context Interpretation
 
-### 1. Train-Test Split
+In a medical diagnosis setting, **Recall is the most important metric**.
 
-Split the dataset using:
+Recall measures:
 
-- `test_size = 0.2`
-- `random_state = 42`
-- `stratify = y`
+> Out of all actual malignant (cancerous) tumors, how many were correctly identified?
 
-### 2. Model Training
+A False Negative (predicting a malignant tumor as benign) can be life-threatening.  
+Therefore, minimizing False Negatives is critical.
 
-Train the following models:
-
-- Logistic Regression
-- SVM
-- KNN
-
-Use default parameters unless clearly justified.
-
-### 3. Model Evaluation
-
-For each model, compute:
-
-- Accuracy
-- Precision
-- Recall
-- F1-score
-- Confusion Matrix
-
-### 4. Model Comparison
-
-Create a comparison table summarizing the evaluation metrics for all models.
-
-Then write a short conclusion answering:
-
-- Which model performed best?
-- In a medical context, which metric is most important and why?
+In this case, all models achieved very high Recall, which makes them suitable for medical screening purposes.
 
 ---
 
-## Project Structure
+## 4. Model Recommendation
 
-Your project must follow this structure:
+Although all models performed well, **Logistic Regression** is recommended because:
 
-```
-breast-cancer-binary-classification/
-├── modeling.ipynb
-└── README.md
-```
+- It achieved the best overall balance of metrics.
+- It provides high Recall.
+- It is more interpretable compared to SVM and KNN.
+
+Model interpretability is especially important in healthcare applications.
 
 ---
 
-## Submission Requirements
+## 5. Limitations
 
-- Clean and organized notebook
-- Clear metric comparison
-- Written conclusion
+- No hyperparameter tuning was performed.
+- Feature scaling was not used (as required by the task).
+- Cross-validation was not applied.
+- Performance might change with further optimization.
+
+---
+
+# Final Conclusion
+
+Logistic Regression performed best overall among the three models.  
+In a medical context, Recall is the most critical metric because failing to detect a malignant tumor can have serious consequences.
